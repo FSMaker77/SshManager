@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.example.sshmanager.app-debug-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.sshmanager.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.sshmanager.app-debug-39:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.sshmanager.app-main-41:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.sshmanager.app-debug-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.sshmanager.app-main-41:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]
