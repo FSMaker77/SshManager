@@ -1,6 +1,6 @@
 # 📱 SshManager
 
-[🇮🇹 Italiano](#-italiano) | [🇬🇧 English](#-english)
+[🇮🇹 Italiano](#-italiano) | [🇬🇧 English](#-english-1)
 
 ---
 
