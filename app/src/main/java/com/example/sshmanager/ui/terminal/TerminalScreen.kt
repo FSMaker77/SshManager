@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CircularProgressIndicator
@@ -104,6 +105,16 @@ fun TerminalScreen(
                     }
                 },
                 actions = {
+                    IconButton(
+                        onClick = viewModel::clearOutput,
+                        enabled = outputLines.isNotEmpty(),
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ClearAll,
+                            contentDescription = stringResource(R.string.clear_terminal),
+                        )
+                    }
+
                     when (connectionState) {
                         is SshConnectionState.Connected -> {
                             IconButton(onClick = viewModel::disconnect) {

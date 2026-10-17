@@ -43,4 +43,15 @@
     <string name="status_connecting">Connessione in corso…</string>
     <string name="status_connected">Connesso</string>
     <string name="status_disconnected">Disconnesso</string>
+
+    <string name="clear_terminal">Svuota terminale</string>
+
+    <string name="error_server_not_found">Server non trovato</string>
+    <string name="error_connection_failed">Connessione non riuscita</string>
+    <string name="error_send_failed">Invio del comando non riuscito</string>
+    <string name="error_session_not_connected">Sessione non connessa</string>
+
+    <string name="connected_to">Connesso a %1$s@%2$s:%3$d</string>
+    <string name="session_terminated">Sessione terminata dal server</string>
+    <string name="disconnected_message">Disconnesso</string>
 </resources>

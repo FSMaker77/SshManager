@@ -4,6 +4,12 @@
 /.idea
 .DS_Store
 /build
+**/build/
 /captures
 .externalNativeBuild
 .cxx
+*.apk
+*.aab
+*.keystore
+*.jks
+.secrets/

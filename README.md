@@ -1,61 +1,72 @@
-cat << 'EOF' > ~/Projects/SshManager/README.md
-# 📱 SshManager
+# SshManager
 
-- [🇮🇹 Passa alla versione Italiana](#-italiano)
-- [🇬🇧 Switch to English version](#-english)
+An Android SSH client built with Kotlin and Jetpack Compose. Manage your SSH servers and run remote commands from a real-time terminal.
+
+- [Italiano](#italiano)
+- [English](#english)
 
 ---
 
-## 🇮🇹 Italiano
+## Italiano
 
-**SshManager** è un'applicazione Android nativa sviluppata in **Kotlin** e **Jetpack Compose**, progettata per gestire ed eseguire collegamenti e comandi SSH direttamente dal tuo smartphone in modo semplice, veloce e sicuro.
+**SshManager** è un'applicazione Android nativa sviluppata in **Kotlin** e **Jetpack Compose**, progettata per gestire server SSH ed eseguire comandi remoti direttamente dallo smartphone in modo semplice e veloce.
 
-### ✨ Caratteristiche Principali
-- **Interfaccia Moderna (Jetpack Compose & Material 3):** UI pulita, reattiva e intuitiva con navigazione fluida.
-- **Gestione Server:** Aggiungi, modifica ed elimina i tuoi server SSH salvando Host, Porta, Username e credenziali (Password o Chiave Privata).
-- **Terminale in Tempo Reale:** Esegui comandi remoti e visualizza l'output live grazie all'integrazione con la libreria **JSch** (`xterm-256color`).
-- **Architettura Locale:** Salvataggio dei dati sicuro ed efficiente tramite **Room Database** (pattern MVVM).
+### Caratteristiche
 
-### 🛠️ Tecnologie Utilizzate
+- **Interfaccia moderna** (Jetpack Compose & Material 3): UI pulita, reattiva e con tema chiaro/scuro automatico.
+- **Gestione server**: aggiungi, modifica ed elimina i tuoi server SSH (Host, Porta, Utente e credenziali: Password o Chiave Privata).
+- **Terminale in tempo reale**: esegui comandi remoti e visualizza l'output live grazie alla libreria **JSch** (`xterm-256color`).
+- **Archiviazione locale**: salvataggio dei dati tramite **Room Database** (pattern MVVM).
+
+### Tecnologie
+
 - **Linguaggio:** Kotlin
-- **UI Framework:** Jetpack Compose, Material 3
+- **UI:** Jetpack Compose, Material 3
 - **Database:** Room (KSP)
-- **Libreria SSH:** JSch (`com.github.mwiede`)
+- **SSH:** JSch (`com.github.mwiede`)
 - **Architettura:** MVVM (ViewModel, StateFlow)
 
-### 🚀 Come Compilare e Installare
-Assicurati di avere configurato un JDK compatibile (es. JDK 21) e un dispositivo Android connesso con il *Debug USB* attivo.
+### Compilazione
 
-1. Clona il repository:
-   ```bash
-   git clone [https://github.com/FSMaker77/SshManager.git](https://github.com/FSMaker77/SshManager.git)
-   cd SshManager
-   
-   
-      
-## 🇮🇹 english
+Requisiti: JDK 21 e Android SDK 37.
 
-**SshManager** is a native Android application developed in **Kotlin** and **Jetpack Compose**, designed to manage and execute SSH connections and commands directly from your smartphone—simply, quickly, and securely.
+```bash
+git clone https://github.com/FSMaker77/SshManager.git
+cd SshManager
+./gradlew :app:assembleDebug
+```
 
-### ✨ Key Features
-- **Modern Interface (Jetpack Compose & Material 3):** A clean, responsive, and intuitive UI with smooth navigation.
-- **Server Management:** Add, edit, and delete your SSH servers by saving the Host, Port, Username, and credentials (Password or Private Key).
-- **Real-Time Terminal:** Execute remote commands and view live output, powered by the **JSch** library (`xterm-256color`).
-- **Local Architecture:** Secure and efficient data storage using **Room Database** (following the MVVM pattern).
+L'APK viene generato in `app/build/outputs/apk/debug/app-debug.apk`.
 
-### 🛠️ Technologies Used
+---
+
+## English
+
+**SshManager** is a native Android application written in **Kotlin** and **Jetpack Compose**, designed to manage SSH servers and run remote commands directly from your phone.
+
+### Features
+
+- **Modern UI** (Jetpack Compose & Material 3): clean, responsive, with automatic dark/light theme.
+- **Server management**: add, edit and delete SSH servers (Host, Port, Username and credentials: Password or Private Key).
+- **Real-time terminal**: run remote commands and view live output, powered by the **JSch** library (`xterm-256color`).
+- **Local storage**: data stored locally using **Room Database** (MVVM pattern).
+
+### Technologies
+
 - **Language:** Kotlin
-- **UI Framework:** Jetpack Compose, Material 3
+- **UI:** Jetpack Compose, Material 3
 - **Database:** Room (KSP)
-- **SSH Library:** JSch (`com.github.mwiede`)
+- **SSH:** JSch (`com.github.mwiede`)
 - **Architecture:** MVVM (ViewModel, StateFlow)
 
-### 🚀 How to Build and Install
-Ensure you have a compatible JDK (e.g., JDK 21) configured and an Android device connected with *USB Debugging* enabled.
+### Build
 
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/FSMaker77/SshManager.git](https://github.com/FSMaker77/SshManager.git)
-   cd SshManager📱 SshManager
+Requirements: JDK 21 and Android SDK 37.
 
+```bash
+git clone https://github.com/FSMaker77/SshManager.git
+cd SshManager
+./gradlew :app:assembleDebug
+```
 
+The APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.

@@ -10,7 +10,6 @@ import com.example.sshmanager.data.SshServerRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 class ServersViewModel(private val repository: SshServerRepository) : ViewModel() {
 
@@ -20,10 +19,6 @@ class ServersViewModel(private val repository: SshServerRepository) : ViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList(),
         )
-
-    fun deleteServer(server: SshServer) {
-        viewModelScope.launch { repository.delete(server) }
-    }
 
     companion object {
         fun factory(repository: SshServerRepository): ViewModelProvider.Factory = viewModelFactory {

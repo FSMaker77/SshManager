@@ -1,10 +1,12 @@
 package com.example.sshmanager.ui.terminal
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.sshmanager.R
 import com.example.sshmanager.data.SshServer
 import com.example.sshmanager.data.SshServerRepository
 import com.example.sshmanager.ssh.SshConnectionException
@@ -18,9 +20,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class TerminalViewModel(
+    application: Application,
     private val repository: SshServerRepository,
     private val serverId: Long,
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     private val _serverName = MutableStateFlow("")
     val serverName: StateFlow<String> = _serverName.asStateFlow()
@@ -41,7 +44,9 @@ class TerminalViewModel(
             server = loaded
             _serverName.value = loaded?.name.orEmpty()
             if (loaded == null) {
-                _connectionState.value = SshConnectionState.Error("Server non trovato")
+                _connectionState.value = SshConnectionState.Error(
+                    getApplication<Application>().getString(R.string.error_server_not_found),
+                )
             }
         }
     }
@@ -60,20 +65,27 @@ class TerminalViewModel(
                 newSession.connect()
             } catch (e: SshConnectionException) {
                 _connectionState.value = SshConnectionState.Error(
-                    e.message ?: "Connessione non riuscita",
+                    e.message ?: getString(R.string.error_connection_failed),
                 )
                 return@launch
             }
 
             session = newSession
             _connectionState.value = SshConnectionState.Connected
-            appendLine("Connesso a ${target.username}@${target.host}:${target.port}")
+            appendLine(
+                getString(
+                    R.string.connected_to,
+                    target.username,
+                    target.host,
+                    target.port,
+                ),
+            )
 
             readerJob = viewModelScope.launch {
                 newSession.readOutput().collect { line -> appendLine(line) }
                 if (_connectionState.value is SshConnectionState.Connected) {
                     _connectionState.value = SshConnectionState.Disconnected
-                    appendLine("Sessione terminata dal server")
+                    appendLine(getString(R.string.session_terminated))
                 }
             }
         }
@@ -90,10 +102,14 @@ class TerminalViewModel(
                 currentSession.sendCommand(trimmed)
             } catch (e: SshConnectionException) {
                 _connectionState.value = SshConnectionState.Error(
-                    e.message ?: "Invio del comando non riuscito",
+                    e.message ?: getString(R.string.error_send_failed),
                 )
             }
         }
+    }
+
+    fun clearOutput() {
+        _outputLines.value = emptyList()
     }
 
     fun disconnect() {
@@ -102,7 +118,7 @@ class TerminalViewModel(
         session?.disconnect()
         session = null
         _connectionState.value = SshConnectionState.Disconnected
-        appendLine("Disconnesso")
+        appendLine(getString(R.string.disconnected_message))
     }
 
     override fun onCleared() {
@@ -111,6 +127,9 @@ class TerminalViewModel(
         session = null
         super.onCleared()
     }
+
+    private fun getString(resId: Int, vararg args: Any): String =
+        getApplication<Application>().getString(resId, *args)
 
     private fun appendLine(line: String) {
         _outputLines.update { current ->
@@ -125,7 +144,14 @@ class TerminalViewModel(
             repository: SshServerRepository,
             serverId: Long,
         ): ViewModelProvider.Factory = viewModelFactory {
-            initializer { TerminalViewModel(repository, serverId) }
+            initializer {
+                val application = checkNotNull(
+                    this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY],
+                ) {
+                    "Application non disponibile"
+                }
+                TerminalViewModel(application, repository, serverId)
+            }
         }
     }
 }
